@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "122036336322",
+    "project_id": "publiccompanies-cf1ca",
+    "storage_bucket": "publiccompanies-cf1ca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:122036336322:android:cea4e85939e732f3412d5b",
+        "android_client_info": {
+          "package_name": "com.sueraychang.publiccompanies"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFu_ebwTvenX9BcKGPh8xMfObwFmRvy-g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

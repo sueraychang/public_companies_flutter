@@ -10,16 +10,31 @@ environment:
   sdk: '>=3.1.5 <4.0.0'
 
 dependencies:
+  dio: ^5.3.3
+  firebase_analytics: ^10.6.3
+  firebase_core: ^2.21.0
+  firebase_crashlytics: ^3.4.3
   flutter:
     sdk: flutter
+  flutter_bloc: ^8.1.3
   flutter_localizations:
     sdk: flutter
+  freezed_annotation: ^2.4.1
+  go_router: ^12.1.0
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  json_annotation: ^4.8.1
+  logger: ^2.0.2+1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   flutter_lints: ^2.0.0
+  hive_generator: ^2.0.1
+  build_runner: ^2.4.6
+  freezed: ^2.4.5
+  json_serializable: ^6.7.1
 
 flutter:
   uses-material-design: true
