@@ -1,20 +1,85 @@
-import 'package:flutter/material.dart';
+import 'dart:async';
+import 'dart:isolate';
 
-import 'src/app.dart';
-import 'src/settings/settings_controller.dart';
-import 'src/settings/settings_service.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:publiccompanies/data/default_data_repository.dart';
+import 'package:publiccompanies/data/source/local/local_data_source.dart';
+import 'package:publiccompanies/data/source/remote/remote_data_source.dart';
+import 'package:publiccompanies/domain/data_repository.dart';
+import 'package:publiccompanies/firebase_options.dart';
+import 'package:publiccompanies/utils/build_context_extension.dart';
+import 'package:publiccompanies/utils/common.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:publiccompanies/utils/go_router.dart';
 
 void main() async {
-  // Set up the SettingsController, which will glue user settings to multiple
-  // Flutter Widgets.
-  final settingsController = SettingsController(SettingsService());
+  runZonedGuarded<Future<void>>(() async {
+    WidgetsFlutterBinding.ensureInitialized();
 
-  // Load the user's preferred theme while the splash screen is displayed.
-  // This prevents a sudden theme change when the app is first displayed.
-  await settingsController.loadSettings();
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
 
-  // Run the app and pass in the SettingsController. The app listens to the
-  // SettingsController for changes, then passes it further down to the
-  // SettingsView.
-  runApp(MyApp(settingsController: settingsController));
+    await FirebaseAnalytics.instance.setAnalyticsCollectionEnabled(!isDebug());
+
+    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+
+    Isolate.current.addErrorListener(RawReceivePort((pair) async {
+      final List<dynamic> errorAndStacktrace = pair;
+      await FirebaseCrashlytics.instance.recordError(
+        errorAndStacktrace.first,
+        errorAndStacktrace.last,
+        fatal: true,
+      );
+    }).sendPort);
+
+    runApp(const Root());
+  },
+      (error, stack) =>
+          FirebaseCrashlytics.instance.recordError(error, stack, fatal: true));
+}
+
+/// Create global objects in Root widget using RepositoryProvider.
+class Root extends StatelessWidget {
+  const Root({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiRepositoryProvider(providers: [
+      RepositoryProvider<DataRepository>(
+        create: (_) => DefaultDataRepository(
+          local: LocalDataSource(),
+          remote: RemoteDataSource(),
+        ),
+      )
+    ], child: const App());
+  }
+}
+
+class App extends StatelessWidget {
+  const App({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp.router(
+      restorationScopeId: 'app',
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      onGenerateTitle: (BuildContext context) => context.l10n.appTitle,
+      theme: ThemeData.light(useMaterial3: true),
+      routerConfig: router,
+      builder: (context, child) {
+        double scale = MediaQuery.of(context).textScaleFactor;
+        scale = scale > 1.3 ? 1.3 : scale;
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(textScaleFactor: scale),
+          child: child!,
+        );
+      },
+    );
+  }
 }
