@@ -4,5 +4,8 @@
     "description": "The title of the application"
   },
 
-  "industriesPageTitle": "產業別"
+  "industriesPageTitle": "產業別",
+
+  "bottomNavigationItemIndustryTitle": "產業",
+  "bottomNavigationItemCollectionTitle": "追蹤"
 }

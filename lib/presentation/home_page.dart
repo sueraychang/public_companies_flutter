@@ -1,11 +1,45 @@
 import 'package:flutter/material.dart';
+import 'package:publiccompanies/presentation/collections_page.dart';
 import 'package:publiccompanies/presentation/industries_page.dart';
+import 'package:publiccompanies/utils/build_context_extension.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int _currentIndex = 0;
+
+  final pages = [
+    const IndustriesPage(),
+    const CollectionsPage(),
+  ];
+
+  @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: IndustriesPage());
+    return Scaffold(
+      body: pages[_currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        items: [
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.domain),
+            label: context.l10n.bottomNavigationItemIndustryTitle,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.star_border_outlined),
+            label: context.l10n.bottomNavigationItemCollectionTitle,
+          ),
+        ],
+        onTap: (value) {
+          setState(() {
+            _currentIndex = value;
+          });
+        },
+      ),
+    );
   }
 }
