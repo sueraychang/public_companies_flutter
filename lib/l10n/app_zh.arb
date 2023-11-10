@@ -2,5 +2,7 @@
   "appTitle": "公開發行公司",
   "@appTitle": {
     "description": "The title of the application"
-  }
+  },
+
+  "industriesPageTitle": "產業別"
 }
