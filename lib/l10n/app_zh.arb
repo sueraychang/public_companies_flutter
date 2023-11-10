@@ -7,5 +7,29 @@
   "industriesPageTitle": "產業別",
 
   "bottomNavigationItemIndustryTitle": "產業",
-  "bottomNavigationItemCollectionTitle": "追蹤"
+  "bottomNavigationItemCollectionTitle": "追蹤",
+
+  "addToCollectionTitle": "加入追蹤列表",
+  "addToCollectionDescription": "是否將{company}加入列表內？",
+  "@addToCollectionDescription": {
+    "placeholders": {
+      "company": {
+        "type": "String"
+      }
+    }
+  },
+
+  "deleteFromCollectionTitle": "從追蹤列表中移除",
+  "deleteFromCollectionDescription": "是否將{company}從追蹤列表中移除？",
+  "@deleteFromCollectionDescription": {
+    "placeholders": {
+      "company": {
+        "type": "String"
+      }
+    }
+  },
+
+  "commonAdd": "加入",
+  "commonDelete": "移除",
+  "commonCancel": "取消"
 }

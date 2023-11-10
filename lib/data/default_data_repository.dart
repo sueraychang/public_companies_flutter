@@ -42,4 +42,24 @@ class DefaultDataRepository implements DataRepository {
   Future<Result<Company>> getCompany(String companyCode) {
     return local.getCompany(companyCode);
   }
+
+  @override
+  Future<Result<bool>> addToCollection(Company company) {
+    return local.addToCollection(company);
+  }
+
+  @override
+  Result<Company> getCollection(String companyCode) {
+    return local.getCollection(companyCode);
+  }
+
+  @override
+  List<Company> getCollections() {
+    return local.getCollections();
+  }
+
+  @override
+  Future<Result<bool>> deleteFromCollection(String companyCode) {
+    return local.deleteFromCollection(companyCode);
+  }
 }

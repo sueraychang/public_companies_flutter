@@ -45,8 +45,8 @@ class LocalDataSource implements DataSource {
   }
 
   @override
-  Future<Result<List<Company>>> getCompanies() {
-    return Future.value(Result.success(dbHelper.getCompanies()));
+  Future<Result<List<Company>>> getCompanies() async {
+    return Result.success(dbHelper.getCompanies());
   }
 
   @override
@@ -65,5 +65,28 @@ class LocalDataSource implements DataSource {
   @override
   Future<Result<bool>> clearCompanies() async {
     return Result.success(await dbHelper.clearCompanies());
+  }
+
+  @override
+  Future<Result<bool>> addToCollection(Company company) async {
+    return Result.success(await dbHelper.addToCollections(company));
+  }
+
+  @override
+  Result<Company> getCollection(String companyCode) {
+    final result = dbHelper.getCollection(companyCode);
+    return result != null
+        ? Result.success(result)
+        : Result.failure(Exception('Company $companyCode not found.'));
+  }
+
+  @override
+  List<Company> getCollections() {
+    return dbHelper.getCollections();
+  }
+
+  @override
+  Future<Result<bool>> deleteFromCollection(String companyCode) async {
+    return Result.success(await dbHelper.deleteFromCollections(companyCode));
   }
 }

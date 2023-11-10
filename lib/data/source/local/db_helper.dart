@@ -2,12 +2,14 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:publiccompanies/domain/entities/company.dart';
 import 'package:publiccompanies/domain/entities/industry.dart';
 
-const String _hiveBoxCompanies = 'box_companies';
 const String _hiveBoxIndustries = 'box_industries';
+const String _hiveBoxCompanies = 'box_companies';
+const String _hiveBoxCollections = 'box_collections';
 
 class DbHelper {
   late final Box<Industry> _industries;
   late final Box<Company> _companies;
+  late final Box<Company> _collections;
 
   Future init() async {
     await Hive.initFlutter();
@@ -17,6 +19,7 @@ class DbHelper {
 
     _industries = await Hive.openBox<Industry>(_hiveBoxIndustries);
     _companies = await Hive.openBox<Company>(_hiveBoxCompanies);
+    _collections = await Hive.openBox<Company>(_hiveBoxCollections);
   }
 
   List<Industry> getIndustries() {
@@ -28,7 +31,9 @@ class DbHelper {
   }
 
   Future<bool> saveIndustries(List<Industry> industries) async {
-    final industriesMap = {for (var industry in industries) industry.code: industry};
+    final industriesMap = {
+      for (var industry in industries) industry.code: industry
+    };
     await _industries.putAll(industriesMap);
     return true;
   }
@@ -54,6 +59,29 @@ class DbHelper {
 
   Future<bool> clearCompanies() async {
     await _companies.clear();
+    return true;
+  }
+
+  List<Company> getCollections() {
+    return _collections.values.toList();
+  }
+
+  Company? getCollection(String companyCode) {
+    return _collections.get(companyCode);
+  }
+
+  Future<bool> addToCollections(Company company) async {
+    await _collections.put(company.code, company);
+    return true;
+  }
+
+  Future<bool> deleteFromCollections(String companyCode) async {
+    await _collections.delete(companyCode);
+    return true;
+  }
+
+  Future<bool> clearCollections() async {
+    await _collections.clear();
     return true;
   }
 }

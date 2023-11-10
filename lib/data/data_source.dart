@@ -18,4 +18,12 @@ abstract class DataSource {
   Future<Result<bool>> saveCompanies({required List<Company> companies});
 
   Future<Result<bool>> clearCompanies();
+
+  List<Company> getCollections();
+
+  Result<Company> getCollection(String companyCode);
+
+  Future<Result<bool>> addToCollection(Company company);
+
+  Future<Result<bool>> deleteFromCollection(String companyCode);
 }

@@ -10,4 +10,12 @@ abstract class DataRepository {
   Future<Result<List<Company>>> getCompanies({required bool forceUpdate});
 
   Future<Result<Company>> getCompany(String companyCode);
+
+  List<Company> getCollections();
+
+  Result<Company> getCollection(String companyCode);
+
+  Future<Result<bool>> addToCollection(Company company);
+
+  Future<Result<bool>> deleteFromCollection(String companyCode);
 }

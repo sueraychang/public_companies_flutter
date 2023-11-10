@@ -11,6 +11,7 @@ import 'package:publiccompanies/data/source/local/db_helper.dart';
 import 'package:publiccompanies/data/source/local/local_data_source.dart';
 import 'package:publiccompanies/data/source/remote/api_helper.dart';
 import 'package:publiccompanies/data/source/remote/remote_data_source.dart';
+import 'package:publiccompanies/domain/cubit/collections_cubit.dart';
 import 'package:publiccompanies/domain/data_repository.dart';
 import 'package:publiccompanies/firebase_options.dart';
 import 'package:publiccompanies/utils/build_context_extension.dart';
@@ -50,21 +51,24 @@ void main() async {
           FirebaseCrashlytics.instance.recordError(error, stack, fatal: true));
 }
 
-/// Create global objects in Root widget using RepositoryProvider.
+/// Create global repository, bloc and cubit in Root widget.
 class Root extends StatelessWidget {
   final DbHelper dbHelper;
   const Root({super.key, required this.dbHelper});
 
   @override
   Widget build(BuildContext context) {
-    return MultiRepositoryProvider(providers: [
-      RepositoryProvider<DataRepository>(
-        create: (_) => DefaultDataRepository(
-          local: LocalDataSource(dbHelper: dbHelper),
-          remote: RemoteDataSource(apiHelper: ApiHelper()),
-        ),
-      )
-    ], child: const App());
+    final repo = DefaultDataRepository(
+      local: LocalDataSource(dbHelper: dbHelper),
+      remote: RemoteDataSource(apiHelper: ApiHelper()),
+    );
+    return RepositoryProvider<DataRepository>(
+      create: (_) => repo,
+      child: BlocProvider(
+        create: (_) => CollectionsCubit(repo: repo),
+        child: const App(),
+      ),
+    );
   }
 }
 

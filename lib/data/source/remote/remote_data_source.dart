@@ -69,9 +69,32 @@ class RemoteDataSource implements DataSource {
       {required String message, Object? e, StackTrace? s}) async {
     log.e('$message \n$e \n$s');
     await FirebaseCrashlytics.instance.recordError(e, s, reason: message);
-    return e != null ? Failure(e as Exception) : Failure(Exception(e ?? message));
+    return e != null
+        ? Failure(e as Exception)
+        : Failure(Exception(e ?? message));
   }
-  
-  
-  
+
+  @override
+  Future<Result<bool>> addToCollection(Company company) {
+    // TODO: implement addToCollection
+    throw UnimplementedError();
+  }
+
+  @override
+  Result<Company> getCollection(String companyCode) {
+    // TODO: implement getCollection
+    throw UnimplementedError();
+  }
+
+  @override
+  List<Company> getCollections() {
+    // TODO: implement getCollections
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Result<bool>> deleteFromCollection(String companyCode) {
+    // TODO: implement removeFromCollection
+    throw UnimplementedError();
+  }
 }
