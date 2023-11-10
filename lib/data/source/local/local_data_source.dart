@@ -50,6 +50,14 @@ class LocalDataSource implements DataSource {
   }
 
   @override
+  Future<Result<Company>> getCompany(String companyCode) async {
+    final result = dbHelper.getCompany(companyCode);
+    return result != null
+        ? Result.success(result)
+        : Result.failure(Exception('Company $companyCode not found.'));
+  }
+
+  @override
   Future<Result<bool>> saveCompanies({required List<Company> companies}) async {
     return Result.success(await dbHelper.saveCompanies(companies));
   }

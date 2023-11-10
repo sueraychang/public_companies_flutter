@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:publiccompanies/domain/bloc/companies_by_industry_bloc.dart';
 import 'package:publiccompanies/domain/data_repository.dart';
 import 'package:publiccompanies/domain/entities/company.dart';
 import 'package:publiccompanies/domain/entities/industry.dart';
+import 'package:publiccompanies/utils/go_router.dart';
 
 class CompaniesByIndustryPage extends StatelessWidget {
   final String industryCode;
@@ -46,7 +48,10 @@ class CompaniesByIndustryView extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final company = response.$2[index];
                   return InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      context.push(ROUTE_PATH_COMPANY.replaceFirst(
+                          ':companyCode', company.code));
+                    },
                     child: ListTile(
                       title: Text('${company.code} ${company.abbreviation}'),
                     ),

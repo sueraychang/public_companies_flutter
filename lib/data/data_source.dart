@@ -13,6 +13,8 @@ abstract class DataSource {
 
   Future<Result<List<Company>>> getCompanies();
 
+  Future<Result<Company>> getCompany(String companyCode);
+
   Future<Result<bool>> saveCompanies({required List<Company> companies});
 
   Future<Result<bool>> clearCompanies();

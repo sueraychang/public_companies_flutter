@@ -8,4 +8,6 @@ abstract class DataRepository {
   Future<Result<Industry>> getIndustry(String industryCode);
 
   Future<Result<List<Company>>> getCompanies({required bool forceUpdate});
+
+  Future<Result<Company>> getCompany(String companyCode);
 }

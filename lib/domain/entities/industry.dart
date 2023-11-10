@@ -1,4 +1,3 @@
-
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -16,3 +15,5 @@ class Industry with _$Industry {
   factory Industry.fromJson(Map<String, Object?> json) =>
       _$IndustryFromJson(json);
 }
+
+const Industry unknownIndustry = Industry(code: '**', name: 'Unknown');

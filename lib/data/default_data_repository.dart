@@ -37,4 +37,9 @@ class DefaultDataRepository implements DataRepository {
     }
     return results;
   }
+
+  @override
+  Future<Result<Company>> getCompany(String companyCode) {
+    return local.getCompany(companyCode);
+  }
 }

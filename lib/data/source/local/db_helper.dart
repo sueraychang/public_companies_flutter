@@ -42,6 +42,10 @@ class DbHelper {
     return _companies.values.toList();
   }
 
+  Company? getCompany(String companyCode) {
+    return _companies.get(companyCode);
+  }
+
   Future<bool> saveCompanies(List<Company> companies) async {
     final companiesMap = {for (var company in companies) company.code: company};
     await _companies.putAll(companiesMap);
