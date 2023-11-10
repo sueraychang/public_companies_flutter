@@ -4,9 +4,8 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:publiccompanies/presentation/home_page.dart';
-import 'package:publiccompanies/presentation/splash_page.dart';
+import 'package:publiccompanies/presentation/launch_page.dart';
 import 'package:publiccompanies/utils/analytics_helper.dart';
-
 
 const String ROUTE_PATH_SPLASH = '/';
 const String ROUTE_PATH_HOME = '/home';
@@ -15,7 +14,7 @@ final GoRouter router = GoRouter(routes: <GoRoute>[
   GoRoute(
     path: ROUTE_PATH_SPLASH,
     builder: (BuildContext context, GoRouterState state) {
-      return const SplashPage();
+      return const LaunchPage();
     },
   ),
   GoRoute(

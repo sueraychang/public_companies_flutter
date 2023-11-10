@@ -7,7 +7,9 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:publiccompanies/data/default_data_repository.dart';
+import 'package:publiccompanies/data/source/local/db_helper.dart';
 import 'package:publiccompanies/data/source/local/local_data_source.dart';
+import 'package:publiccompanies/data/source/remote/api_helper.dart';
 import 'package:publiccompanies/data/source/remote/remote_data_source.dart';
 import 'package:publiccompanies/domain/data_repository.dart';
 import 'package:publiccompanies/firebase_options.dart';
@@ -37,7 +39,12 @@ void main() async {
       );
     }).sendPort);
 
-    runApp(const Root());
+    final dbHelper = DbHelper();
+    await dbHelper.init();
+
+    runApp(Root(
+      dbHelper: dbHelper,
+    ));
   },
       (error, stack) =>
           FirebaseCrashlytics.instance.recordError(error, stack, fatal: true));
@@ -45,15 +52,16 @@ void main() async {
 
 /// Create global objects in Root widget using RepositoryProvider.
 class Root extends StatelessWidget {
-  const Root({super.key});
+  final DbHelper dbHelper;
+  const Root({super.key, required this.dbHelper});
 
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(providers: [
       RepositoryProvider<DataRepository>(
         create: (_) => DefaultDataRepository(
-          local: LocalDataSource(),
-          remote: RemoteDataSource(),
+          local: LocalDataSource(dbHelper: dbHelper),
+          remote: RemoteDataSource(apiHelper: ApiHelper()),
         ),
       )
     ], child: const App());
