@@ -23,6 +23,10 @@ class DbHelper {
     return _industries.values.toList();
   }
 
+  Industry? getIndustry(String industryCode) {
+    return _industries.get(industryCode);
+  }
+
   Future<bool> saveIndustries(List<Industry> industries) async {
     final industriesMap = {for (var industry in industries) industry.code: industry};
     await _industries.putAll(industriesMap);

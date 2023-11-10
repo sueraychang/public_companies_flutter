@@ -26,6 +26,14 @@ class LocalDataSource implements DataSource {
   }
 
   @override
+  Future<Result<Industry>> getIndustry(String industryCode) async {
+    final result = dbHelper.getIndustry(industryCode);
+    return result != null
+        ? Result.success(result)
+        : Result.failure(Exception('Industry $industryCode not found.'));
+  }
+
+  @override
   Future<Result<bool>> saveIndustries(
       {required List<Industry> industries}) async {
     return Result.success(await dbHelper.saveIndustries(industries));

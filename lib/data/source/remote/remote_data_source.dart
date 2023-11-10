@@ -17,6 +17,12 @@ class RemoteDataSource implements DataSource {
   }
 
   @override
+  Future<Result<Industry>> getIndustry(String industryCode) {
+    // TODO: implement getIndustry
+    throw UnimplementedError();
+  }
+
+  @override
   Future<Result<bool>> saveIndustries({required List<Industry> industries}) {
     throw UnimplementedError();
   }
@@ -59,4 +65,5 @@ class RemoteDataSource implements DataSource {
     await FirebaseCrashlytics.instance.recordError(e, s, reason: message);
     return e != null ? Failure(e as Exception) : Failure(Exception(e ?? message));
   }
+  
 }

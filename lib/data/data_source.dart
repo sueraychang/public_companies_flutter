@@ -5,6 +5,8 @@ import 'package:publiccompanies/domain/entities/result.dart';
 abstract class DataSource {
   Future<Result<List<Industry>>> getIndustries();
 
+  Future<Result<Industry>> getIndustry(String industryCode);
+
   Future<Result<bool>> saveIndustries({required List<Industry> industries});
 
   Future<Result<bool>> clearIndustries();

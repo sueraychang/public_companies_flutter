@@ -16,6 +16,11 @@ class DefaultDataRepository implements DataRepository {
   }
 
   @override
+  Future<Result<Industry>> getIndustry(String industryCode) {
+    return local.getIndustry(industryCode);
+  }
+
+  @override
   Future<Result<List<Company>>> getCompanies(
       {required bool forceUpdate}) async {
     if (!forceUpdate) {

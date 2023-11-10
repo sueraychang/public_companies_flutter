@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:publiccompanies/domain/bloc/industry_bloc.dart';
 import 'package:publiccompanies/domain/data_repository.dart';
 import 'package:publiccompanies/domain/entities/industry.dart';
 import 'package:publiccompanies/utils/build_context_extension.dart';
+import 'package:publiccompanies/utils/go_router.dart';
 
 class IndustriesPage extends StatelessWidget {
   const IndustriesPage({super.key});
@@ -45,8 +47,16 @@ class IndustriesView extends StatelessWidget {
                 itemCount: industries.length,
                 itemBuilder: (context, index) {
                   final value = industries[index];
-                  return ListTile(
-                    title: Text('${value.$1.name}(${value.$2})'),
+                  return InkWell(
+                    onTap: value.$2 != 0
+                        ? () {
+                            context.push(ROUTE_PATH_COMPANIES_BY_INDUSTRY
+                                .replaceFirst(':industryCode', value.$1.code));
+                          }
+                        : null,
+                    child: ListTile(
+                      title: Text('${value.$1.name}(${value.$2})'),
+                    ),
                   );
                 },
               );
