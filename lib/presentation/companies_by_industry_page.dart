@@ -42,6 +42,12 @@ class CompaniesByIndustryView extends StatelessWidget {
             return Scaffold(
               appBar: AppBar(
                 title: Text(response.$1.name),
+                leading: IconButton(
+                  icon: const Icon(Icons.arrow_back_ios),
+                  onPressed: () {
+                    context.pop();
+                  },
+                ),
               ),
               body: ListView.builder(
                 itemCount: response.$2.length,
