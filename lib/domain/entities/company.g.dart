@@ -28,18 +28,19 @@ class CompanyAdapter extends TypeAdapter<_$CompanyImpl> {
       operator: fields[8] as String,
       establishmentDate: fields[9] as String,
       listingDate: fields[10] as String,
-      parValuePerShare: fields[11] as String,
-      privateEquilty: fields[12] as String,
-      preferredStock: fields[13] as String,
-      website: fields[14] as String,
-      authorizedStock: fields[15] as String,
+      capital: fields[11] as String,
+      parValuePerShare: fields[12] as String,
+      privateEquilty: fields[13] as String,
+      preferredStock: fields[14] as String,
+      website: fields[15] as String,
+      authorizedStock: fields[16] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$CompanyImpl obj) {
     writer
-      ..writeByte(16)
+      ..writeByte(17)
       ..writeByte(0)
       ..write(obj.code)
       ..writeByte(1)
@@ -63,14 +64,16 @@ class CompanyAdapter extends TypeAdapter<_$CompanyImpl> {
       ..writeByte(10)
       ..write(obj.listingDate)
       ..writeByte(11)
-      ..write(obj.parValuePerShare)
+      ..write(obj.capital)
       ..writeByte(12)
-      ..write(obj.privateEquilty)
+      ..write(obj.parValuePerShare)
       ..writeByte(13)
-      ..write(obj.preferredStock)
+      ..write(obj.privateEquilty)
       ..writeByte(14)
-      ..write(obj.website)
+      ..write(obj.preferredStock)
       ..writeByte(15)
+      ..write(obj.website)
+      ..writeByte(16)
       ..write(obj.authorizedStock);
   }
 
@@ -102,6 +105,7 @@ _$CompanyImpl _$$CompanyImplFromJson(Map<String, dynamic> json) =>
       operator: json['總機電話'] as String? ?? '',
       establishmentDate: json['成立日期'] as String? ?? '',
       listingDate: json['上市日期'] as String? ?? '',
+      capital: json['實收資本額'] as String? ?? '',
       parValuePerShare: json['普通股每股面額'] as String? ?? '',
       privateEquilty: json['私募股數'] as String? ?? '',
       preferredStock: json['特別股'] as String? ?? '',
@@ -122,6 +126,7 @@ Map<String, dynamic> _$$CompanyImplToJson(_$CompanyImpl instance) =>
       '總機電話': instance.operator,
       '成立日期': instance.establishmentDate,
       '上市日期': instance.listingDate,
+      '實收資本額': instance.capital,
       '普通股每股面額': instance.parValuePerShare,
       '私募股數': instance.privateEquilty,
       '特別股': instance.preferredStock,

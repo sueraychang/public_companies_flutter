@@ -43,7 +43,7 @@ class IndustriesView extends StatelessWidget {
                       .entries
                       .map((e) => (e.key, e.value))
                       .toList();
-              return ListView.builder(
+              return ListView.separated(
                 itemCount: industries.length,
                 itemBuilder: (context, index) {
                   final value = industries[index];
@@ -57,6 +57,15 @@ class IndustriesView extends StatelessWidget {
                     child: ListTile(
                       title: Text('${value.$1.name}(${value.$2})'),
                     ),
+                  );
+                },
+                separatorBuilder: (context, index) {
+                  return const Divider(
+                    thickness: 1,
+                    height: 1,
+                    indent: 0,
+                    endIndent: 0,
+                    color: Colors.black12,
                   );
                 },
               );

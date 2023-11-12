@@ -49,7 +49,7 @@ class CompaniesByIndustryView extends StatelessWidget {
                   },
                 ),
               ),
-              body: ListView.builder(
+              body: ListView.separated(
                 itemCount: response.$2.length,
                 itemBuilder: (context, index) {
                   final company = response.$2[index];
@@ -61,6 +61,15 @@ class CompaniesByIndustryView extends StatelessWidget {
                     child: ListTile(
                       title: Text('${company.code} ${company.abbreviation}'),
                     ),
+                  );
+                },
+                separatorBuilder: (context, index) {
+                  return const Divider(
+                    indent: 0,
+                    endIndent: 0,
+                    thickness: 1,
+                    height: 1,
+                    color: Colors.black12,
                   );
                 },
               ),

@@ -3,6 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:publiccompanies/domain/data_repository.dart';
 import 'package:publiccompanies/domain/entities/industry.dart';
 import 'package:publiccompanies/domain/entities/result.dart' as result;
+import 'package:publiccompanies/utils/common.dart';
 
 part 'industry_bloc.freezed.dart';
 
@@ -29,7 +30,8 @@ class IndustryBloc extends Bloc<IndustryEvent, IndustryState> {
           getIndustries: () async {
             Map<String, Industry> industries = {};
             await repo.getIndustries().then((value) {
-              final List<Industry> industryList = (value as result.Success).data;
+              final List<Industry> industryList =
+                  (value as result.Success).data;
               industries.addAll(
                   {for (var industry in industryList) industry.code: industry});
             });
@@ -41,8 +43,10 @@ class IndustryBloc extends Bloc<IndustryEvent, IndustryState> {
             final companies = await repo.getCompanies(forceUpdate: false);
             companies.when(
               success: (data) {
-                
-                // Collect companies based on industry code.
+                /// Collect companies based on industry code.
+                /// There are some company's industry code are not listed in the TSE產業別
+                /// provided by wireframe like "13", "XX", "98", etc.
+                /// Need to make sure how to handle these companies data.
                 for (var company in data) {
                   if (industries.containsKey(company.industryCode)) {
                     final industry = industries[company.industryCode]!;

@@ -54,18 +54,21 @@ mixin _$Company {
   @JsonKey(name: '上市日期')
   String get listingDate => throw _privateConstructorUsedError;
   @HiveField(11)
+  @JsonKey(name: '實收資本額')
+  String get capital => throw _privateConstructorUsedError;
+  @HiveField(12)
   @JsonKey(name: '普通股每股面額')
   String get parValuePerShare => throw _privateConstructorUsedError;
-  @HiveField(12)
+  @HiveField(13)
   @JsonKey(name: '私募股數')
   String get privateEquilty => throw _privateConstructorUsedError;
-  @HiveField(13)
+  @HiveField(14)
   @JsonKey(name: '特別股')
   String get preferredStock => throw _privateConstructorUsedError;
-  @HiveField(14)
+  @HiveField(15)
   @JsonKey(name: '網址')
   String get website => throw _privateConstructorUsedError;
-  @HiveField(15)
+  @HiveField(16)
   @JsonKey(name: '已發行普通股數或TDR原股發行股數')
   String get authorizedStock => throw _privateConstructorUsedError;
 
@@ -91,11 +94,12 @@ abstract class $CompanyCopyWith<$Res> {
       @HiveField(8) @JsonKey(name: '總機電話') String operator,
       @HiveField(9) @JsonKey(name: '成立日期') String establishmentDate,
       @HiveField(10) @JsonKey(name: '上市日期') String listingDate,
-      @HiveField(11) @JsonKey(name: '普通股每股面額') String parValuePerShare,
-      @HiveField(12) @JsonKey(name: '私募股數') String privateEquilty,
-      @HiveField(13) @JsonKey(name: '特別股') String preferredStock,
-      @HiveField(14) @JsonKey(name: '網址') String website,
-      @HiveField(15)
+      @HiveField(11) @JsonKey(name: '實收資本額') String capital,
+      @HiveField(12) @JsonKey(name: '普通股每股面額') String parValuePerShare,
+      @HiveField(13) @JsonKey(name: '私募股數') String privateEquilty,
+      @HiveField(14) @JsonKey(name: '特別股') String preferredStock,
+      @HiveField(15) @JsonKey(name: '網址') String website,
+      @HiveField(16)
       @JsonKey(name: '已發行普通股數或TDR原股發行股數')
       String authorizedStock});
 }
@@ -124,6 +128,7 @@ class _$CompanyCopyWithImpl<$Res, $Val extends Company>
     Object? operator = null,
     Object? establishmentDate = null,
     Object? listingDate = null,
+    Object? capital = null,
     Object? parValuePerShare = null,
     Object? privateEquilty = null,
     Object? preferredStock = null,
@@ -175,6 +180,10 @@ class _$CompanyCopyWithImpl<$Res, $Val extends Company>
           ? _value.listingDate
           : listingDate // ignore: cast_nullable_to_non_nullable
               as String,
+      capital: null == capital
+          ? _value.capital
+          : capital // ignore: cast_nullable_to_non_nullable
+              as String,
       parValuePerShare: null == parValuePerShare
           ? _value.parValuePerShare
           : parValuePerShare // ignore: cast_nullable_to_non_nullable
@@ -218,11 +227,12 @@ abstract class _$$CompanyImplCopyWith<$Res> implements $CompanyCopyWith<$Res> {
       @HiveField(8) @JsonKey(name: '總機電話') String operator,
       @HiveField(9) @JsonKey(name: '成立日期') String establishmentDate,
       @HiveField(10) @JsonKey(name: '上市日期') String listingDate,
-      @HiveField(11) @JsonKey(name: '普通股每股面額') String parValuePerShare,
-      @HiveField(12) @JsonKey(name: '私募股數') String privateEquilty,
-      @HiveField(13) @JsonKey(name: '特別股') String preferredStock,
-      @HiveField(14) @JsonKey(name: '網址') String website,
-      @HiveField(15)
+      @HiveField(11) @JsonKey(name: '實收資本額') String capital,
+      @HiveField(12) @JsonKey(name: '普通股每股面額') String parValuePerShare,
+      @HiveField(13) @JsonKey(name: '私募股數') String privateEquilty,
+      @HiveField(14) @JsonKey(name: '特別股') String preferredStock,
+      @HiveField(15) @JsonKey(name: '網址') String website,
+      @HiveField(16)
       @JsonKey(name: '已發行普通股數或TDR原股發行股數')
       String authorizedStock});
 }
@@ -249,6 +259,7 @@ class __$$CompanyImplCopyWithImpl<$Res>
     Object? operator = null,
     Object? establishmentDate = null,
     Object? listingDate = null,
+    Object? capital = null,
     Object? parValuePerShare = null,
     Object? privateEquilty = null,
     Object? preferredStock = null,
@@ -300,6 +311,10 @@ class __$$CompanyImplCopyWithImpl<$Res>
           ? _value.listingDate
           : listingDate // ignore: cast_nullable_to_non_nullable
               as String,
+      capital: null == capital
+          ? _value.capital
+          : capital // ignore: cast_nullable_to_non_nullable
+              as String,
       parValuePerShare: null == parValuePerShare
           ? _value.parValuePerShare
           : parValuePerShare // ignore: cast_nullable_to_non_nullable
@@ -340,11 +355,12 @@ class _$CompanyImpl with DiagnosticableTreeMixin implements _Company {
       @HiveField(8) @JsonKey(name: '總機電話') this.operator = '',
       @HiveField(9) @JsonKey(name: '成立日期') this.establishmentDate = '',
       @HiveField(10) @JsonKey(name: '上市日期') this.listingDate = '',
-      @HiveField(11) @JsonKey(name: '普通股每股面額') this.parValuePerShare = '',
-      @HiveField(12) @JsonKey(name: '私募股數') this.privateEquilty = '',
-      @HiveField(13) @JsonKey(name: '特別股') this.preferredStock = '',
-      @HiveField(14) @JsonKey(name: '網址') this.website = '',
-      @HiveField(15)
+      @HiveField(11) @JsonKey(name: '實收資本額') this.capital = '',
+      @HiveField(12) @JsonKey(name: '普通股每股面額') this.parValuePerShare = '',
+      @HiveField(13) @JsonKey(name: '私募股數') this.privateEquilty = '',
+      @HiveField(14) @JsonKey(name: '特別股') this.preferredStock = '',
+      @HiveField(15) @JsonKey(name: '網址') this.website = '',
+      @HiveField(16)
       @JsonKey(name: '已發行普通股數或TDR原股發行股數')
       this.authorizedStock = ''});
 
@@ -397,28 +413,32 @@ class _$CompanyImpl with DiagnosticableTreeMixin implements _Company {
   final String listingDate;
   @override
   @HiveField(11)
+  @JsonKey(name: '實收資本額')
+  final String capital;
+  @override
+  @HiveField(12)
   @JsonKey(name: '普通股每股面額')
   final String parValuePerShare;
   @override
-  @HiveField(12)
+  @HiveField(13)
   @JsonKey(name: '私募股數')
   final String privateEquilty;
   @override
-  @HiveField(13)
+  @HiveField(14)
   @JsonKey(name: '特別股')
   final String preferredStock;
   @override
-  @HiveField(14)
+  @HiveField(15)
   @JsonKey(name: '網址')
   final String website;
   @override
-  @HiveField(15)
+  @HiveField(16)
   @JsonKey(name: '已發行普通股數或TDR原股發行股數')
   final String authorizedStock;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Company(code: $code, name: $name, abbreviation: $abbreviation, industryCode: $industryCode, address: $address, invoiceNumber: $invoiceNumber, chairman: $chairman, president: $president, operator: $operator, establishmentDate: $establishmentDate, listingDate: $listingDate, parValuePerShare: $parValuePerShare, privateEquilty: $privateEquilty, preferredStock: $preferredStock, website: $website, authorizedStock: $authorizedStock)';
+    return 'Company(code: $code, name: $name, abbreviation: $abbreviation, industryCode: $industryCode, address: $address, invoiceNumber: $invoiceNumber, chairman: $chairman, president: $president, operator: $operator, establishmentDate: $establishmentDate, listingDate: $listingDate, capital: $capital, parValuePerShare: $parValuePerShare, privateEquilty: $privateEquilty, preferredStock: $preferredStock, website: $website, authorizedStock: $authorizedStock)';
   }
 
   @override
@@ -437,6 +457,7 @@ class _$CompanyImpl with DiagnosticableTreeMixin implements _Company {
       ..add(DiagnosticsProperty('operator', operator))
       ..add(DiagnosticsProperty('establishmentDate', establishmentDate))
       ..add(DiagnosticsProperty('listingDate', listingDate))
+      ..add(DiagnosticsProperty('capital', capital))
       ..add(DiagnosticsProperty('parValuePerShare', parValuePerShare))
       ..add(DiagnosticsProperty('privateEquilty', privateEquilty))
       ..add(DiagnosticsProperty('preferredStock', preferredStock))
@@ -468,6 +489,7 @@ class _$CompanyImpl with DiagnosticableTreeMixin implements _Company {
                 other.establishmentDate == establishmentDate) &&
             (identical(other.listingDate, listingDate) ||
                 other.listingDate == listingDate) &&
+            (identical(other.capital, capital) || other.capital == capital) &&
             (identical(other.parValuePerShare, parValuePerShare) ||
                 other.parValuePerShare == parValuePerShare) &&
             (identical(other.privateEquilty, privateEquilty) ||
@@ -494,6 +516,7 @@ class _$CompanyImpl with DiagnosticableTreeMixin implements _Company {
       operator,
       establishmentDate,
       listingDate,
+      capital,
       parValuePerShare,
       privateEquilty,
       preferredStock,
@@ -527,11 +550,12 @@ abstract class _Company implements Company {
       @HiveField(8) @JsonKey(name: '總機電話') final String operator,
       @HiveField(9) @JsonKey(name: '成立日期') final String establishmentDate,
       @HiveField(10) @JsonKey(name: '上市日期') final String listingDate,
-      @HiveField(11) @JsonKey(name: '普通股每股面額') final String parValuePerShare,
-      @HiveField(12) @JsonKey(name: '私募股數') final String privateEquilty,
-      @HiveField(13) @JsonKey(name: '特別股') final String preferredStock,
-      @HiveField(14) @JsonKey(name: '網址') final String website,
-      @HiveField(15)
+      @HiveField(11) @JsonKey(name: '實收資本額') final String capital,
+      @HiveField(12) @JsonKey(name: '普通股每股面額') final String parValuePerShare,
+      @HiveField(13) @JsonKey(name: '私募股數') final String privateEquilty,
+      @HiveField(14) @JsonKey(name: '特別股') final String preferredStock,
+      @HiveField(15) @JsonKey(name: '網址') final String website,
+      @HiveField(16)
       @JsonKey(name: '已發行普通股數或TDR原股發行股數')
       final String authorizedStock}) = _$CompanyImpl;
 
@@ -583,22 +607,26 @@ abstract class _Company implements Company {
   String get listingDate;
   @override
   @HiveField(11)
+  @JsonKey(name: '實收資本額')
+  String get capital;
+  @override
+  @HiveField(12)
   @JsonKey(name: '普通股每股面額')
   String get parValuePerShare;
   @override
-  @HiveField(12)
+  @HiveField(13)
   @JsonKey(name: '私募股數')
   String get privateEquilty;
   @override
-  @HiveField(13)
+  @HiveField(14)
   @JsonKey(name: '特別股')
   String get preferredStock;
   @override
-  @HiveField(14)
+  @HiveField(15)
   @JsonKey(name: '網址')
   String get website;
   @override
-  @HiveField(15)
+  @HiveField(16)
   @JsonKey(name: '已發行普通股數或TDR原股發行股數')
   String get authorizedStock;
   @override

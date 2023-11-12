@@ -9,6 +9,31 @@
   "bottomNavigationItemIndustryTitle": "產業",
   "bottomNavigationItemCollectionTitle": "追蹤",
 
+  "companyBasicInformation": "基本資料",
+  "companyChairman": "董事長",
+  "companyPresident": "總經理",
+  "companyIndustryType": "產業類別",
+  "companyEstablishmentDate": "公司成立日期",
+  "companyListingDate": "上市日期",
+  "companyOperator": "總機",
+  "companyInvoiceNumber": "統一編號",
+  "companyAddress": "地址",
+  "companyCapital": "實收資本額（元）",
+  "companyParValuePerShare": "普通股每股面額",
+  "companyAuthorizedStock": "已發行普通股數或 TDR 原股發行股數",
+  "companyPrivateEquilty": "（含私募 {share} 股）",
+  "@companyPrivateEquilty": {
+    "placeholders": {
+      "share": {
+        "type": "String"
+      }
+    }
+  },
+  "companyPreferredStock": "特別股",
+
+  "dollar": "元",
+  "share": "股",
+
   "addToCollectionTitle": "加入追蹤列表",
   "addToCollectionDescription": "是否將{company}加入列表內？",
   "@addToCollectionDescription": {
