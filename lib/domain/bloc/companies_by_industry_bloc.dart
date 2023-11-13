@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:publiccompanies/domain/bloc/bloc_state.dart';
 import 'package:publiccompanies/domain/data_repository.dart';
 import 'package:publiccompanies/domain/entities/company.dart';
 import 'package:publiccompanies/domain/entities/industry.dart';
@@ -13,19 +14,12 @@ class CompaniesByIndustryEvent with _$CompaniesByIndustryEvent {
       GetCompanies;
 }
 
-@freezed
-class CompaniesByIndustryState<T, E> with _$CompaniesByIndustryState<T, E> {
-  const factory CompaniesByIndustryState.loading() = Loading;
-  const factory CompaniesByIndustryState.success(T data) = Success;
-  const factory CompaniesByIndustryState.failure(E e) = Failure;
-}
-
 class CompaniesByIndustryBloc
-    extends Bloc<CompaniesByIndustryEvent, CompaniesByIndustryState> {
+    extends Bloc<CompaniesByIndustryEvent, BlocState> {
   final DataRepository repo;
   CompaniesByIndustryBloc({
     required this.repo,
-  }) : super(const CompaniesByIndustryState.loading()) {
+  }) : super(const Loading()) {
     on<CompaniesByIndustryEvent>(
       (event, emit) async {
         await event.when(
@@ -33,7 +27,7 @@ class CompaniesByIndustryBloc
             final industryResponse = await repo.getIndustry(industryCode);
 
             if (industryResponse is result.Failure) {
-              emit(Failure((industryResponse as result.Failure).e));
+              emit(Error((industryResponse as result.Failure).e));
               return;
             }
 
@@ -43,7 +37,7 @@ class CompaniesByIndustryBloc
                 await repo.getCompanies(forceUpdate: false);
 
             if (companiesResponse is result.Failure) {
-              emit(Failure((companiesResponse as result.Failure).e));
+              emit(Error((companiesResponse as result.Failure).e));
               return;
             }
 
@@ -51,7 +45,7 @@ class CompaniesByIndustryBloc
                 (companiesResponse as result.Success).data;
 
             emit(
-              Success((
+              Loaded((
                 industry,
                 companies.where((c) => c.industryCode == industry.code).toList()
               )),

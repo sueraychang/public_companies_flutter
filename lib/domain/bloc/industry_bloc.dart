@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:publiccompanies/domain/bloc/bloc_state.dart';
 import 'package:publiccompanies/domain/data_repository.dart';
 import 'package:publiccompanies/domain/entities/industry.dart';
 import 'package:publiccompanies/domain/entities/result.dart' as result;
-import 'package:publiccompanies/utils/common.dart';
 
 part 'industry_bloc.freezed.dart';
 
@@ -12,18 +12,11 @@ class IndustryEvent with _$IndustryEvent {
   const factory IndustryEvent.getIndustries() = GetIndustries;
 }
 
-@freezed
-class IndustryState<T, E> with _$IndustryState<T, E> {
-  const factory IndustryState.loading() = Loading;
-  const factory IndustryState.success(T data) = Success;
-  const factory IndustryState.failure(E e) = Failure;
-}
-
-class IndustryBloc extends Bloc<IndustryEvent, IndustryState> {
+class IndustryBloc extends Bloc<IndustryEvent, BlocState> {
   final DataRepository repo;
   IndustryBloc({
     required this.repo,
-  }) : super(const IndustryState.loading()) {
+  }) : super(const Loading()) {
     on<IndustryEvent>(
       (event, emit) async {
         await event.when(
@@ -61,10 +54,10 @@ class IndustryBloc extends Bloc<IndustryEvent, IndustryState> {
                         (a, b) => a.key.code.compareTo(b.key.code),
                       ));
 
-                emit(IndustryState.success(sortedByIndustryCode));
+                emit(Loaded(sortedByIndustryCode));
               },
               failure: (e) {
-                emit(IndustryState.failure(e));
+                emit(Error(e));
               },
             );
           },

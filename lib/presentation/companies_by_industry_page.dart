@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:publiccompanies/domain/bloc/bloc_state.dart';
 import 'package:publiccompanies/domain/bloc/companies_by_industry_bloc.dart';
 import 'package:publiccompanies/domain/data_repository.dart';
 import 'package:publiccompanies/domain/entities/company.dart';
@@ -29,7 +30,7 @@ class CompaniesByIndustryView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CompaniesByIndustryBloc, CompaniesByIndustryState>(
+    return BlocBuilder<CompaniesByIndustryBloc, BlocState>(
       builder: (context, state) {
         return state.when(
           loading: () {
@@ -37,7 +38,7 @@ class CompaniesByIndustryView extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           },
-          success: (data) {
+          loaded: (data) {
             final response = (data as (Industry, List<Company>));
             return Scaffold(
               appBar: AppBar(
@@ -75,7 +76,7 @@ class CompaniesByIndustryView extends StatelessWidget {
               ),
             );
           },
-          failure: (e) {
+          error: (e) {
             return const Center(
               child: CircularProgressIndicator(),
             );

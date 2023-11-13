@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:publiccompanies/domain/bloc/bloc_state.dart';
 import 'package:publiccompanies/domain/data_repository.dart';
 import 'package:publiccompanies/domain/entities/company.dart';
 import 'package:publiccompanies/domain/entities/industry.dart';
@@ -12,18 +13,11 @@ class CompanyEvent with _$CompanyEvent {
   const factory CompanyEvent.getCompany(String companyCode) = GetCompany;
 }
 
-@freezed
-class CompanyState<T, E> with _$CompanyState<T, E> {
-  const factory CompanyState.loading() = Loading;
-  const factory CompanyState.success(T data) = Success;
-  const factory CompanyState.failure(E e) = Failure;
-}
-
-class CompanyBloc extends Bloc<CompanyEvent, CompanyState> {
+class CompanyBloc extends Bloc<CompanyEvent, BlocState> {
   final DataRepository repo;
   CompanyBloc({
     required this.repo,
-  }) : super(const CompanyState.loading()) {
+  }) : super(const Loading()) {
     on<CompanyEvent>(
       (event, emit) async {
         await event.when(
@@ -31,7 +25,7 @@ class CompanyBloc extends Bloc<CompanyEvent, CompanyState> {
             final companyResponse = await repo.getCompany(companyCode);
 
             if (companyResponse is result.Failure) {
-              emit(Failure((companyResponse as result.Failure).e));
+              emit(Error((companyResponse as result.Failure).e));
               return;
             }
 
@@ -42,10 +36,10 @@ class CompanyBloc extends Bloc<CompanyEvent, CompanyState> {
 
             industryResponse.when(
               success: (data) {
-                emit(Success((company, data)));
+                emit(Loaded((company, data)));
               },
               failure: (e) {
-                emit(Success((company, unknownIndustry)));
+                emit(Loaded((company, unknownIndustry)));
               },
             );
           },

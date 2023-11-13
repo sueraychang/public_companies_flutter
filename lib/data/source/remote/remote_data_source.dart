@@ -13,22 +13,25 @@ class RemoteDataSource implements DataSource {
 
   @override
   Future<Result<List<Industry>>> getIndustries() {
+    // Do NOT implement this function.
     throw UnimplementedError();
   }
 
   @override
   Future<Result<Industry>> getIndustry(String industryCode) {
-    // TODO: implement getIndustry
+    // Do NOT implement this function.
     throw UnimplementedError();
   }
 
   @override
   Future<Result<bool>> saveIndustries({required List<Industry> industries}) {
+    // Do NOT implement this function.
     throw UnimplementedError();
   }
 
   @override
   Future<Result<bool>> clearIndustries() {
+    // Do NOT implement this function.
     throw UnimplementedError();
   }
 
@@ -51,17 +54,19 @@ class RemoteDataSource implements DataSource {
 
   @override
   Future<Result<Company>> getCompany(String companyCode) {
-    // TODO: implement getCompany
+    // Do NOT implement this function.
     throw UnimplementedError();
   }
 
   @override
   Future<Result<bool>> saveCompanies({required List<Company> companies}) {
+    // Do NOT implement this function.
     throw UnimplementedError();
   }
 
   @override
   Future<Result<bool>> clearCompanies() {
+    // Do NOT implement this function.
     throw UnimplementedError();
   }
 
@@ -76,25 +81,25 @@ class RemoteDataSource implements DataSource {
 
   @override
   Future<Result<bool>> addToCollection(Company company) {
-    // TODO: implement addToCollection
+    // Do NOT implement this function.
     throw UnimplementedError();
   }
 
   @override
   Result<Company> getCollection(String companyCode) {
-    // TODO: implement getCollection
+    // Do NOT implement this function.
     throw UnimplementedError();
   }
 
   @override
   List<Company> getCollections() {
-    // TODO: implement getCollections
+    // Do NOT implement this function.
     throw UnimplementedError();
   }
 
   @override
   Future<Result<bool>> deleteFromCollection(String companyCode) {
-    // TODO: implement removeFromCollection
+    // Do NOT implement this function.
     throw UnimplementedError();
   }
 }

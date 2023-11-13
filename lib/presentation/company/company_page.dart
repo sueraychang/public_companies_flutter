@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:publiccompanies/domain/bloc/bloc_state.dart';
 import 'package:publiccompanies/domain/bloc/company_bloc.dart';
 import 'package:publiccompanies/domain/data_repository.dart';
 import 'package:publiccompanies/domain/entities/company.dart';
@@ -35,7 +36,7 @@ class CompanyView extends StatefulWidget {
 class _CompanyViewState extends State<CompanyView> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CompanyBloc, CompanyState>(
+    return BlocBuilder<CompanyBloc, BlocState>(
       builder: (context, state) {
         return state.when(
           loading: () {
@@ -43,7 +44,7 @@ class _CompanyViewState extends State<CompanyView> {
               child: CircularProgressIndicator(),
             );
           },
-          success: (data) {
+          loaded: (data) {
             final response = (data as (Company, Industry));
             final company = response.$1;
             final industry = response.$2;
@@ -167,7 +168,7 @@ class _CompanyViewState extends State<CompanyView> {
               ),
             );
           },
-          failure: (e) {
+          error: (e) {
             return const Center(
               child: CircularProgressIndicator(),
             );

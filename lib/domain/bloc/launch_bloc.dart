@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:publiccompanies/domain/bloc/bloc_state.dart';
 import 'package:publiccompanies/domain/data_repository.dart';
 
 part 'launch_bloc.freezed.dart';
@@ -10,18 +11,11 @@ class LaunchEvent with _$LaunchEvent {
       {required bool forceUpdate}) = GetCompaniesAndIndustries;
 }
 
-@freezed
-class LaunchState<T, E> with _$LaunchState<T, E> {
-  const factory LaunchState.loading() = Loading;
-  const factory LaunchState.success(T data) = Success;
-  const factory LaunchState.failure(E e) = Failure;
-}
-
-class LaunchBloc extends Bloc<LaunchEvent, LaunchState> {
+class LaunchBloc extends Bloc<LaunchEvent, BlocState> {
   final DataRepository repo;
   LaunchBloc({
     required this.repo,
-  }) : super(const LaunchState.loading()) {
+  }) : super(const Loading()) {
     on<LaunchEvent>(
       (event, emit) async {
         await event.when(
@@ -30,10 +24,10 @@ class LaunchBloc extends Bloc<LaunchEvent, LaunchState> {
             final companies = await repo.getCompanies(forceUpdate: forceUpdate);
             companies.when(
               success: (data) {
-                emit(LaunchState.success(data));
+                emit(Loaded(data));
               },
               failure: (e) {
-                emit(LaunchState.failure(e));
+                emit(Error(e));
               },
             );
           },
