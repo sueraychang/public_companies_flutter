@@ -45,8 +45,8 @@ class DefaultDataRepository implements DataRepository {
   }
 
   @override
-  Future<Result<bool>> addToCollection(Company company) {
-    return local.addToCollection(company);
+  Future<Result<bool>> addToCollections(Company company) {
+    return local.addToCollections(company);
   }
 
   @override
@@ -60,7 +60,7 @@ class DefaultDataRepository implements DataRepository {
   }
 
   @override
-  Future<Result<bool>> deleteFromCollection(String companyCode) {
-    return local.deleteFromCollection(companyCode);
+  Future<Result<bool>> deleteFromCollections(String companyCode) {
+    return local.deleteFromCollections(companyCode);
   }
 }

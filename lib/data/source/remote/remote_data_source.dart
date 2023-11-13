@@ -71,7 +71,7 @@ class RemoteDataSource implements DataSource {
   }
 
   @override
-  Future<Result<bool>> addToCollection(Company company) {
+  Future<Result<bool>> addToCollections(Company company) {
     // Do NOT implement this function.
     throw UnimplementedError();
   }
@@ -89,7 +89,7 @@ class RemoteDataSource implements DataSource {
   }
 
   @override
-  Future<Result<bool>> deleteFromCollection(String companyCode) {
+  Future<Result<bool>> deleteFromCollections(String companyCode) {
     // Do NOT implement this function.
     throw UnimplementedError();
   }

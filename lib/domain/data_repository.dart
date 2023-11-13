@@ -15,7 +15,7 @@ abstract class DataRepository {
 
   Result<Company> getCollection(String companyCode);
 
-  Future<Result<bool>> addToCollection(Company company);
+  Future<Result<bool>> addToCollections(Company company);
 
-  Future<Result<bool>> deleteFromCollection(String companyCode);
+  Future<Result<bool>> deleteFromCollections(String companyCode);
 }

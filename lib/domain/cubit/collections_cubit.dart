@@ -13,12 +13,12 @@ class CollectionsCubit extends Cubit<List<Company>> {
   }
 
   Future addToCollections(Company company) async {
-    await repo.addToCollection(company);
+    await repo.addToCollections(company);
     emit(repo.getCollections());
   }
 
   Future deleteFromCollections(String companyCode) async {
-    await repo.deleteFromCollection(companyCode);
+    await repo.deleteFromCollections(companyCode);
     emit(repo.getCollections());
   }
 }

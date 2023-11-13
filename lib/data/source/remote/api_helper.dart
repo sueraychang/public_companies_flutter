@@ -8,7 +8,6 @@ String _baseUrl = 'https://openapi.twse.com.tw/';
 
 class ApiHelper {
   late final Dio _dio;
-  String? accessToken;
 
   ApiHelper() {
     final options = BaseOptions(

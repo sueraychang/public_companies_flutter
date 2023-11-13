@@ -48,7 +48,7 @@ class LocalDataSource implements DataSource {
   Future<Result<List<Company>>> getCompanies() async {
     final results = dbHelper.getCompanies();
     if (results.isNotEmpty) {
-      return Success(dbHelper.getCompanies());
+      return Success(results);
     } else {
       return Failure(Exception('No companies data.'));
     }
@@ -73,7 +73,7 @@ class LocalDataSource implements DataSource {
   }
 
   @override
-  Future<Result<bool>> addToCollection(Company company) async {
+  Future<Result<bool>> addToCollections(Company company) async {
     return Success(await dbHelper.addToCollections(company));
   }
 
@@ -91,7 +91,7 @@ class LocalDataSource implements DataSource {
   }
 
   @override
-  Future<Result<bool>> deleteFromCollection(String companyCode) async {
+  Future<Result<bool>> deleteFromCollections(String companyCode) async {
     return Success(await dbHelper.deleteFromCollections(companyCode));
   }
 }
