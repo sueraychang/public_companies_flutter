@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:publiccompanies/domain/bloc/bloc_state.dart';
 import 'package:publiccompanies/domain/data_repository.dart';
 import 'package:publiccompanies/domain/entities/industry.dart';
-import 'package:publiccompanies/domain/entities/result.dart' as result;
+import 'package:publiccompanies/domain/entities/result.dart';
 
 part 'industry_bloc.freezed.dart';
 
@@ -22,11 +22,14 @@ class IndustryBloc extends Bloc<IndustryEvent, BlocState> {
         await event.when(
           getIndustries: () async {
             Map<String, Industry> industries = {};
-            await repo.getIndustries().then((value) {
-              final List<Industry> industryList =
-                  (value as result.Success).data;
-              industries.addAll(
-                  {for (var industry in industryList) industry.code: industry});
+            final industriesResponse = await repo.getIndustries();
+            if (industriesResponse is Failure) {
+              emit(Error((industriesResponse as Failure).e));
+            }
+
+            industries.addAll({
+              for (var industry in (industriesResponse as Success).data)
+                industry.code: industry
             });
 
             Map<Industry, int> results = {

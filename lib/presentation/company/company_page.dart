@@ -8,6 +8,8 @@ import 'package:publiccompanies/domain/entities/industry.dart';
 import 'package:publiccompanies/presentation/company/company_app_bar.dart';
 import 'package:publiccompanies/presentation/company/company_info_item.dart';
 import 'package:publiccompanies/presentation/company/company_name_item.dart';
+import 'package:publiccompanies/presentation/widgets/common_failure_widget.dart';
+import 'package:publiccompanies/presentation/widgets/loading_widget.dart';
 import 'package:publiccompanies/utils/build_context_extension.dart';
 import 'package:publiccompanies/utils/common.dart';
 
@@ -40,9 +42,7 @@ class _CompanyViewState extends State<CompanyView> {
       builder: (context, state) {
         return state.when(
           loading: () {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
+            return const LoadingWidget();
           },
           loaded: (data) {
             final response = (data as (Company, Industry));
@@ -169,9 +169,7 @@ class _CompanyViewState extends State<CompanyView> {
             );
           },
           error: (e) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
+            return const CommonFailureWidget();
           },
         );
       },

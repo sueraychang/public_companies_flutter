@@ -53,6 +53,9 @@
       }
     }
   },
+  "emptyCollectionHint": "追蹤列表尚無任何資料",
+
+  "commonFailure": "請檢查網路連線或稍後再試！",
 
   "commonAdd": "加入",
   "commonDelete": "移除",

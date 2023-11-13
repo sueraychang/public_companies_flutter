@@ -5,6 +5,8 @@ import 'package:publiccompanies/domain/bloc/bloc_state.dart';
 import 'package:publiccompanies/domain/bloc/industry_bloc.dart';
 import 'package:publiccompanies/domain/data_repository.dart';
 import 'package:publiccompanies/domain/entities/industry.dart';
+import 'package:publiccompanies/presentation/widgets/common_failure_widget.dart';
+import 'package:publiccompanies/presentation/widgets/loading_widget.dart';
 import 'package:publiccompanies/utils/build_context_extension.dart';
 import 'package:publiccompanies/utils/go_router.dart';
 
@@ -34,9 +36,7 @@ class IndustriesView extends StatelessWidget {
         builder: (context, state) {
           return state.when(
             loading: () {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
+              return const LoadingWidget();
             },
             loaded: (data) {
               final List<(Industry, int)> industries =
@@ -72,9 +72,7 @@ class IndustriesView extends StatelessWidget {
               );
             },
             error: (e) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
+              return const CommonFailureWidget();
             },
           );
         },

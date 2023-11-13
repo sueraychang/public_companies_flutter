@@ -23,19 +23,20 @@ class DefaultDataRepository implements DataRepository {
   @override
   Future<Result<List<Company>>> getCompanies(
       {required bool forceUpdate}) async {
-    if (!forceUpdate) {
-      final results = await local.getCompanies();
-      if (results is Success) {
-        return results;
-      }
+    if (forceUpdate) {
+      final results = await remote.getCompanies();
+      results.when(
+        success: (data) async {
+          await local.clearCompanies();
+          await local.saveCompanies(companies: data);
+        },
+        failure: (e) {
+          // Do nothing.
+        },
+      );
     }
 
-    final results = await remote.getCompanies();
-    if (results is Success) {
-      final companies = (results as Success).data;
-      local.saveCompanies(companies: companies);
-    }
-    return results;
+    return local.getCompanies();
   }
 
   @override

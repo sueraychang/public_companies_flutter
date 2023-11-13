@@ -1,4 +1,3 @@
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:publiccompanies/data/data_source.dart';
 import 'package:publiccompanies/data/source/remote/api_helper.dart';
 import 'package:publiccompanies/domain/entities/company.dart';
@@ -47,8 +46,9 @@ class RemoteDataSource implements DataSource {
 
       return Success(companies);
     } catch (e, s) {
-      const msg = 'Failed to get companies';
-      return _logThanReturn(message: msg, e: e, s: s);
+      final msg = 'Failed to get companies \n$e \n$s';
+      log.e(msg);
+      return Failure(e as Exception);
     }
   }
 
@@ -68,15 +68,6 @@ class RemoteDataSource implements DataSource {
   Future<Result<bool>> clearCompanies() {
     // Do NOT implement this function.
     throw UnimplementedError();
-  }
-
-  Future<Result<T>> _logThanReturn<T>(
-      {required String message, Object? e, StackTrace? s}) async {
-    log.e('$message \n$e \n$s');
-    await FirebaseCrashlytics.instance.recordError(e, s, reason: message);
-    return e != null
-        ? Failure(e as Exception)
-        : Failure(Exception(e ?? message));
   }
 
   @override

@@ -22,62 +22,67 @@ class LocalDataSource implements DataSource {
           (jsonDecode(data) as List).map((e) => Industry.fromJson(e)).toList();
       await saveIndustries(industries: industries);
     }
-    return Result.success(industries);
+    return Success(industries);
   }
 
   @override
   Future<Result<Industry>> getIndustry(String industryCode) async {
     final result = dbHelper.getIndustry(industryCode);
     return result != null
-        ? Result.success(result)
+        ? Success(result)
         : Result.failure(Exception('Industry $industryCode not found.'));
   }
 
   @override
   Future<Result<bool>> saveIndustries(
       {required List<Industry> industries}) async {
-    return Result.success(await dbHelper.saveIndustries(industries));
+    return Success(await dbHelper.saveIndustries(industries));
   }
 
   @override
   Future<Result<bool>> clearIndustries() async {
-    return Result.success(await dbHelper.clearIndustries());
+    return Success(await dbHelper.clearIndustries());
   }
 
   @override
   Future<Result<List<Company>>> getCompanies() async {
-    return Result.success(dbHelper.getCompanies());
+    final results = dbHelper.getCompanies();
+    if (results.isNotEmpty) {
+      return Success(dbHelper.getCompanies());
+    } else {
+      return Failure(Exception('No companies data.'));
+    }
   }
 
   @override
   Future<Result<Company>> getCompany(String companyCode) async {
     final result = dbHelper.getCompany(companyCode);
     return result != null
-        ? Result.success(result)
+        ? Success(result)
         : Result.failure(Exception('Company $companyCode not found.'));
   }
 
   @override
   Future<Result<bool>> saveCompanies({required List<Company> companies}) async {
-    return Result.success(await dbHelper.saveCompanies(companies));
+    return Success(await dbHelper.saveCompanies(companies));
   }
 
   @override
   Future<Result<bool>> clearCompanies() async {
-    return Result.success(await dbHelper.clearCompanies());
+    return Success(await dbHelper.clearCompanies());
   }
 
   @override
   Future<Result<bool>> addToCollection(Company company) async {
-    return Result.success(await dbHelper.addToCollections(company));
+    return Success(await dbHelper.addToCollections(company));
   }
 
   @override
   Result<Company> getCollection(String companyCode) {
     final result = dbHelper.getCollection(companyCode);
     return result != null
-        ? Result.success(result)
-        : Result.failure(Exception('Company $companyCode not found.'));
+        ? Success(result)
+        : Result.failure(Exception('Collection $companyCode not found.'));
   }
 
   @override
@@ -87,6 +92,6 @@ class LocalDataSource implements DataSource {
 
   @override
   Future<Result<bool>> deleteFromCollection(String companyCode) async {
-    return Result.success(await dbHelper.deleteFromCollections(companyCode));
+    return Success(await dbHelper.deleteFromCollections(companyCode));
   }
 }

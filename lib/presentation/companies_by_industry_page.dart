@@ -6,6 +6,8 @@ import 'package:publiccompanies/domain/bloc/companies_by_industry_bloc.dart';
 import 'package:publiccompanies/domain/data_repository.dart';
 import 'package:publiccompanies/domain/entities/company.dart';
 import 'package:publiccompanies/domain/entities/industry.dart';
+import 'package:publiccompanies/presentation/widgets/common_failure_widget.dart';
+import 'package:publiccompanies/presentation/widgets/loading_widget.dart';
 import 'package:publiccompanies/utils/go_router.dart';
 
 class CompaniesByIndustryPage extends StatelessWidget {
@@ -34,9 +36,7 @@ class CompaniesByIndustryView extends StatelessWidget {
       builder: (context, state) {
         return state.when(
           loading: () {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
+            return const LoadingWidget();
           },
           loaded: (data) {
             final response = (data as (Industry, List<Company>));
@@ -77,9 +77,7 @@ class CompaniesByIndustryView extends StatelessWidget {
             );
           },
           error: (e) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
+            return const CommonFailureWidget();
           },
         );
       },

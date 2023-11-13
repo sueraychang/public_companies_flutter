@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:publiccompanies/domain/bloc/bloc_state.dart';
 import 'package:publiccompanies/domain/bloc/launch_bloc.dart';
 import 'package:publiccompanies/domain/data_repository.dart';
+import 'package:publiccompanies/presentation/widgets/loading_widget.dart';
 import 'package:publiccompanies/utils/go_router.dart';
 
 class LaunchPage extends StatelessWidget {
@@ -28,11 +29,15 @@ class LaunchView extends StatelessWidget {
     return BlocListener<LaunchBloc, BlocState>(
       listener: (context, state) {
         state.when(
-          loading: () {},
+          loading: () {
+            // Do nothing.
+          },
           loaded: (data) {
             context.go(ROUTE_PATH_HOME);
           },
-          error: (e) {},
+          error: (e) {
+            context.go(ROUTE_PATH_HOME);
+          },
         );
       },
       child: Scaffold(
@@ -46,8 +51,8 @@ class LaunchView extends StatelessWidget {
                 width: logoSize,
                 height: logoSize,
               ),
-              const SizedBox(height: 32),
-              const CircularProgressIndicator(),
+              const SizedBox(height: 48),
+              const LoadingWidget()
             ],
           ),
         ),

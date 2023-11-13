@@ -18,44 +18,51 @@ class CollectionsPage extends StatelessWidget {
       ),
       body: Builder(builder: (context) {
         final collectionsCubit = context.watch<CollectionsCubit>();
-        return ListView.builder(
-          itemCount: collectionsCubit.state.length,
-          itemBuilder: (context, index) {
-            final collection = collectionsCubit.state[index];
-            return Slidable(
-              key: ValueKey(index),
-              endActionPane: ActionPane(
-                motion: const ScrollMotion(),
-                extentRatio: 0.25,
-                children: [
-                  SlidableAction(
-                    onPressed: (_) {
-                      showCollectionDeleteDialog(
-                        context: context,
-                        company: collection,
-                      );
-                    },
-                    backgroundColor: Colors.redAccent,
-                    foregroundColor: Colors.white,
-                    icon: Icons.delete,
-                    label: context.l10n.commonDelete,
-                  ),
-                ],
-              ),
-              child: InkWell(
-                onTap: () {
-                  context.push(
-                    ROUTE_PATH_COMPANY.replaceFirst(
-                        ':companyCode', collection.code),
-                  );
-                },
-                child: ListTile(
-                  title: Text('${collection.code} ${collection.abbreviation}'),
+        if (collectionsCubit.state.isNotEmpty) {
+          return ListView.builder(
+            itemCount: collectionsCubit.state.length,
+            itemBuilder: (context, index) {
+              final collection = collectionsCubit.state[index];
+              return Slidable(
+                key: ValueKey(index),
+                endActionPane: ActionPane(
+                  motion: const ScrollMotion(),
+                  extentRatio: 0.25,
+                  children: [
+                    SlidableAction(
+                      onPressed: (_) {
+                        showCollectionDeleteDialog(
+                          context: context,
+                          company: collection,
+                        );
+                      },
+                      backgroundColor: Colors.redAccent,
+                      foregroundColor: Colors.white,
+                      icon: Icons.delete,
+                      label: context.l10n.commonDelete,
+                    ),
+                  ],
                 ),
-              ),
-            );
-          },
-        );
+                child: InkWell(
+                  onTap: () {
+                    context.push(
+                      ROUTE_PATH_COMPANY.replaceFirst(
+                          ':companyCode', collection.code),
+                    );
+                  },
+                  child: ListTile(
+                    title:
+                        Text('${collection.code} ${collection.abbreviation}'),
+                  ),
+                ),
+              );
+            },
+          );
+        } else {
+          return Center(
+            child: Text(context.l10n.emptyCollectionHint),
+          );
+        }
       }),
     );
   }
