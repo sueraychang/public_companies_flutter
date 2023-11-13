@@ -61,6 +61,7 @@ class CompaniesByIndustryView extends StatelessWidget {
                     },
                     child: ListTile(
                       title: Text('${company.code} ${company.abbreviation}'),
+                      trailing: const Icon(Icons.arrow_forward_ios, size: 12),
                     ),
                   );
                 },

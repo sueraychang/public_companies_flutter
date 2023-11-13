@@ -53,6 +53,7 @@ class CollectionsPage extends StatelessWidget {
                   child: ListTile(
                     title:
                         Text('${collection.code} ${collection.abbreviation}'),
+                        trailing: const Icon(Icons.arrow_forward_ios, size: 12),
                   ),
                 ),
               );

@@ -57,6 +57,7 @@ class IndustriesView extends StatelessWidget {
                         : null,
                     child: ListTile(
                       title: Text('${value.$1.name}(${value.$2})'),
+                      trailing: const Icon(Icons.arrow_forward_ios, size: 12),
                     ),
                   );
                 },
