@@ -10,9 +10,17 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  int _currentIndex = 0;
+class _HomePageState extends State<HomePage> with RestorationMixin {
+  final RestorableInt _currentIndex = RestorableInt(0);
   late final List<Widget> _pages;
+
+  @override
+  String get restorationId => 'homePage';
+
+  @override
+  void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
+    registerForRestoration(_currentIndex, 'bottomNavigationCurrentIndex');
+  }
 
   @override
   void initState() {
@@ -28,11 +36,11 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: IndexedStack(
-        index: _currentIndex,
+        index: _currentIndex.value,
         children: _pages,
       ),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
+        currentIndex: _currentIndex.value,
         items: [
           BottomNavigationBarItem(
             icon: const Icon(Icons.domain),
@@ -45,7 +53,7 @@ class _HomePageState extends State<HomePage> {
         ],
         onTap: (value) {
           setState(() {
-            _currentIndex = value;
+            _currentIndex.value = value;
           });
         },
       ),
