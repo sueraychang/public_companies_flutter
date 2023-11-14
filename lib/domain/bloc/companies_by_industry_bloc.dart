@@ -44,6 +44,9 @@ class CompaniesByIndustryBloc
             final List<Company> companies =
                 (companiesResponse as result.Success).data;
 
+            /// emits the result Record which contains:
+            /// $1: The Industry of the target industryCode.
+            /// $2: The companies which has the same industry code as a List.
             emit(
               Loaded((
                 industry,

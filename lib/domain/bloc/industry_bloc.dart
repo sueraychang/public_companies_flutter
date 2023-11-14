@@ -21,17 +21,21 @@ class IndustryBloc extends Bloc<IndustryEvent, BlocState> {
       (event, emit) async {
         await event.when(
           getIndustries: () async {
-            Map<String, Industry> industries = {};
             final industriesResponse = await repo.getIndustries();
             if (industriesResponse is Failure) {
               emit(Error((industriesResponse as Failure).e));
+              return;
             }
 
+            // Generate industries map for the quick search by code.
+            Map<String, Industry> industries = {};
             industries.addAll({
               for (var industry in (industriesResponse as Success).data)
                 industry.code: industry
             });
 
+            /// Initialize the emitted data map, the key is Industry and
+            /// the value is its company counts.
             Map<Industry, int> results = {
               for (var industry in industries.values) industry: 0
             };
@@ -40,8 +44,8 @@ class IndustryBloc extends Bloc<IndustryEvent, BlocState> {
             companies.when(
               success: (data) {
                 /// Collect companies based on industry code.
-                /// There are some company's industry code are not listed in the TSE產業別
-                /// provided by wireframe like "13", "XX", "98", etc.
+                /// There are some company's industry code are not listed in the
+                /// TSE產業別 provided by wireframe like "13", "XX", "98", etc.
                 /// Need to make sure how to handle these companies data.
                 for (var company in data) {
                   if (industries.containsKey(company.industryCode)) {

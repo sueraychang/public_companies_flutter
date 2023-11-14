@@ -34,6 +34,9 @@ class CompanyBloc extends Bloc<CompanyEvent, BlocState> {
             final industryResponse =
                 await repo.getIndustry(company.industryCode);
 
+            /// emits the result Record which contains:
+            /// $1: The Company of the target companyCode.
+            /// $2: The Industry which the Company belongs to.
             industryResponse.when(
               success: (data) {
                 emit(Loaded((company, data)));
