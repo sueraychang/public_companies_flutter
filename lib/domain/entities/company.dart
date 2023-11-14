@@ -23,13 +23,19 @@ class Company with _$Company {
     @HiveField(9) @JsonKey(name: '成立日期') @Default('') String establishmentDate,
     @HiveField(10) @JsonKey(name: '上市日期') @Default('') String listingDate,
     @HiveField(11) @JsonKey(name: '實收資本額') @Default('') String capital,
-    @HiveField(12) @JsonKey(name: '普通股每股面額') @Default('') String parValuePerShare,
+    @HiveField(12)
+    @JsonKey(name: '普通股每股面額')
+    @Default('')
+    String parValuePerShare,
     @HiveField(13) @JsonKey(name: '私募股數') @Default('') String privateEquilty,
     @HiveField(14) @JsonKey(name: '特別股') @Default('') String preferredStock,
     @HiveField(15) @JsonKey(name: '網址') @Default('') String website,
-    @HiveField(16) @JsonKey(name: '已發行普通股數或TDR原股發行股數') @Default('') String authorizedStock,
+    @HiveField(16)
+    @JsonKey(name: '已發行普通股數或TDR原股發行股數')
+    @Default('')
+    String authorizedStock,
   }) = _Company;
 
-  factory Company.fromJson(Map<String, Object?> json)
-      => _$CompanyFromJson(json);
+  factory Company.fromJson(Map<String, Object?> json) =>
+      _$CompanyFromJson(json);
 }

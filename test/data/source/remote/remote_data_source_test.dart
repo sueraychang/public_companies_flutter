@@ -28,7 +28,8 @@ void main() {
       expect(response, isA<Success>());
 
       final List<Company> companies = (response as Success).data;
-      expect(companies, _testCompanies.map((e) => Company.fromJson(e)).toList());
+      expect(
+          companies, _testCompanies.map((e) => Company.fromJson(e)).toList());
     });
 
     test('Returns failure if the http call throws exception.', () async {

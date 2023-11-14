@@ -217,7 +217,8 @@ void main() {
     });
 
     test('delete from collections successfully', () async {
-      when(dbHelper.deleteFromCollections('01')).thenAnswer((_) => Future.value(true));
+      when(dbHelper.deleteFromCollections('01'))
+          .thenAnswer((_) => Future.value(true));
       final response = await localDataSource.deleteFromCollections('01');
 
       verify(dbHelper.deleteFromCollections('01')).called(1);

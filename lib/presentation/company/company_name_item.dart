@@ -30,10 +30,9 @@ class CompanyNameItem extends StatelessWidget {
               Text(
                 name,
                 style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18.0,
-                  color: isValid ? Colors.blueAccent : null
-                ),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18.0,
+                    color: isValid ? Colors.blueAccent : null),
               ),
               if (isValid)
                 const Padding(

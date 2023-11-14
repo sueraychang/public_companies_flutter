@@ -47,7 +47,7 @@ void main() {
       verify: (bloc) {
         verify(repo.getCompany('000218')).called(1);
         verify(repo.getIndustry('01')).called(1);
-        
+
         final result = (bloc.state as Loaded).data;
         expect(result, isA<(Company, Industry)>());
         expect(result, (testCompanies[1], testIndustries[0]));
