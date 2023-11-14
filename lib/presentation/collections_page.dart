@@ -19,7 +19,7 @@ class CollectionsPage extends StatelessWidget {
       body: Builder(builder: (context) {
         final collectionsCubit = context.watch<CollectionsCubit>();
         if (collectionsCubit.state.isNotEmpty) {
-          return ListView.builder(
+          return ListView.separated(
             itemCount: collectionsCubit.state.length,
             itemBuilder: (context, index) {
               final collection = collectionsCubit.state[index];
@@ -53,9 +53,18 @@ class CollectionsPage extends StatelessWidget {
                   child: ListTile(
                     title:
                         Text('${collection.code} ${collection.abbreviation}'),
-                        trailing: const Icon(Icons.arrow_forward_ios, size: 12),
+                    trailing: const Icon(Icons.arrow_forward_ios, size: 12),
                   ),
                 ),
+              );
+            },
+            separatorBuilder: (context, index) {
+              return const Divider(
+                thickness: 1,
+                height: 1,
+                indent: 0,
+                endIndent: 0,
+                color: Colors.black12,
               );
             },
           );
