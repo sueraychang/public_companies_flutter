@@ -25,7 +25,7 @@ class DefaultDataRepository implements DataRepository {
       {required bool forceUpdate}) async {
     if (forceUpdate) {
       final results = await remote.getCompanies();
-      results.when(
+      await results.when(
         success: (data) async {
           await local.clearCompanies();
           await local.saveCompanies(companies: data);
