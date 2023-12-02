@@ -33,10 +33,10 @@ class LaunchView extends StatelessWidget {
             // Do nothing.
           },
           loaded: (data) {
-            context.go(ROUTE_PATH_HOME);
+            context.go(ROUTE_PATH_INDUSTRIES);
           },
           error: (e) {
-            context.go(ROUTE_PATH_HOME);
+            context.go(ROUTE_PATH_INDUSTRIES);
           },
         );
       },
